@@ -1,6 +1,6 @@
 // src/App.js
 import React, { useState } from 'react';
-import SensorList from './components/SensorList';
+import TankList from './components/TankList';
 import SensorDetail from './components/SensorDetail';
 
 const App = () => {
@@ -9,19 +9,29 @@ const App = () => {
       id: 1,
       name: 'Tank 1',
       sensors: [
-        { name: 'Sensor A', data: [10, 15, 22, 30, 18, 25] },
-        { name: 'Sensor B', data: [5, 12, 18, 25, 30, 22] },
+        { name: 'Sensor A', data: [/* mock data for Sensor A */] },
+        { name: 'Sensor B', data: [/* mock data for Sensor B */] },
+        { name: 'Sensor C', data: [/* mock data for Sensor C */] },
       ],
     },
     {
       id: 2,
       name: 'Tank 2',
       sensors: [
-        { name: 'Sensor X', data: [20, 25, 30, 15, 12, 18] },
-        { name: 'Sensor Y', data: [8, 10, 15, 20, 28, 35] },
+        { name: 'Sensor X', data: [/* mock data for Sensor X */] },
+        { name: 'Sensor Y', data: [/* mock data for Sensor Y */] },
       ],
     },
-    // Add more tanks as needed
+    // Add more tanks with sensors as needed
+    // ...
+    {
+      id: 15,
+      name: 'Tank 15',
+      sensors: [
+        { name: 'Sensor P', data: [/* mock data for Sensor P */] },
+        { name: 'Sensor Q', data: [/* mock data for Sensor Q */] },
+      ],
+    },
   ]);
   const [selectedTank, setSelectedTank] = useState(null);
 
@@ -29,15 +39,26 @@ const App = () => {
     setSelectedTank(tank);
   };
 
+  const handleBackClick = () => {
+    setSelectedTank(null);
+  };
+
   return (
     <div className="container-fluid">
       <h1 className="mt-3">Sensor Data Visualization</h1>
       <div className="row">
-        <div className="col-md-4">
-          <SensorList tankList={tankList} onItemClick={handleTankClick} />
-        </div>
-        <div className="col-md-8">
-          <SensorDetail selectedTank={selectedTank} />
+        {/* Show the list and detail view on larger screens */}
+        <div className="col-md-4 d-md-block">
+          {/* Show the detail view when a tank is selected */}
+          {selectedTank && (
+            <div>
+              <button className="btn btn-link" onClick={handleBackClick}>
+                Back to List
+              </button>
+              <SensorDetail selectedTank={selectedTank} />
+            </div>
+          )}
+          {!selectedTank && <TankList tankList={tankList} onItemClick={handleTankClick} />}
         </div>
       </div>
     </div>
