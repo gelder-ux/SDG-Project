@@ -35,8 +35,8 @@ code {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 3rem;
-  height: 3rem;
+  width: 4rem;
+  height: 4rem;
   font-size: .5rem;
   border-radius: 100%;
   background-color: #D6EBFF !important;
@@ -84,4 +84,21 @@ code {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 0;
+}
+
+.tank-header {
+
+}
+
+.tank-header__name {
+  font-size: 1.778rem;
+  margin-bottom: 0;
+}
+
+.thank-header__species {
+  font-size: 0.889rem;
+}
+
+.tank-sensors__wrapper {
+  padding: 1rem 0;
 }

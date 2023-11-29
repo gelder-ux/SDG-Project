@@ -537,7 +537,7 @@ const App = () => {
   return (
     <div className="container-fluid">
       <nav className="paf-nav">
-        <a href="#" className="btn btn-light tanks-button">Tanks</a>
+        <a href="#" className="btn btn-light tanks-button" onClick={handleBackClick}>Tanks</a>
         <h1 className="paf-title">PAF Data Hub</h1>
         <a href="#" className="btn btn-light qr-button">QR</a>
       </nav>
@@ -547,9 +547,6 @@ const App = () => {
           {/* Show the detail view when a tank is selected */}
           {selectedTank && (
             <div>
-              <button className="btn btn-link" onClick={handleBackClick}>
-                Back to List
-              </button>
               <SensorDetail selectedTank={selectedTank} />
             </div>
           )}
