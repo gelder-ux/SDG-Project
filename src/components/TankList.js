@@ -4,18 +4,17 @@ import React from 'react';
 const TankList = ({ tankList, onItemClick }) => {
   return (
     <div>
-      <h2>Tank List</h2>
-      <div className="row">
+      <h2 className="sr-only">Tank List</h2>
+      <div className="tank-list">
         {tankList.map((tank) => (
-          <div key={tank.id} className="col-md-4 mb-3">
-            <a
+            <a key={tank.id}
               href="#"
-              className="btn btn-light btn-block"
+              className="btn btn-light tank-button"
               onClick={() => onItemClick(tank)}
             >
-              {tank.name}
+              <div className="tank-button__species">{tank.species}</div>
+              <div className="tank-button__name">{tank.name}</div>
             </a>
-          </div>
         ))}
       </div>
     </div>

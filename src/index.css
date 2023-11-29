@@ -1,3 +1,7 @@
+html {
+  font-size: 18px;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +9,79 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'Red Hat Display', serif;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.paf-app {}
+
+.tank-list {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: flex-start;
+  padding: 1rem;
+  border: 2px solid #000;
+  border-radius: 8px;
+}
+
+.tank-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 3rem;
+  height: 3rem;
+  font-size: .5rem;
+  border-radius: 100%;
+  background-color: #D6EBFF !important;
+  border: 2px solid #2E2D2D;
+  box-shadow: 0px 4px 0px #000;
+}
+
+.tank-button:hover,
+.tank-button:focus {
+  transition: background-color .1s ease-in-out;
+  background-color: #7dafde !important;
+  border: 2px solid #2E2D2D !important;
+  box-shadow: 0px 4px 0px #000;
+}
+
+.tank-button:active {
+  transition: background-color .1s ease-in-out, box-shadow .1s ease-in-out;
+  background-color: #7dafde !important;
+  box-shadow: 0px -2px 0px #000;
+}
+
+
+.tank-button__species {
+  font-size: 0.889rem;
+}
+
+.tank-button__name {
+  font-size: 0.667rem;
+}
+
+/* Visually hides elements but allows screen readers to still interpret content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.paf-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
 }

@@ -8,7 +8,8 @@ const SensorDetail = ({ selectedTank }) => {
       {selectedTank && (
         <div>
           <h2>{selectedTank.name}</h2>
-          <ul>
+          <p>{selectedTank.species}</p>
+          <ul className="list-unstyled">
             {selectedTank.sensors.map((sensor, index) => (
               <li key={index}>
                 {sensor.name}
