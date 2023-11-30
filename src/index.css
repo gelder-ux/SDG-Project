@@ -120,3 +120,69 @@ code {
 .tank-sensors__wrapper {
   padding: 1rem 0;
 }
+
+.sensor-detail__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sensor-detail__tank {
+  display: flex;
+  flex-direction: column;
+  height: 7rem;
+  flex: 1 0 0;
+  padding: 1rem;
+  border: 2px solid #000;
+  border-radius: 8px;
+  box-shadow: 0px 4px 0px #000;
+}
+
+.sensor-detail__sensors--row {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.sensor-detail__sensors--column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.sensor__water {
+  display: flex;
+  flex-direction: column;
+  height: 7rem;
+  flex: 1 0 0;
+  padding: 1rem;
+  background-color: #3284FF;
+  border: 2px solid #000;
+  border-radius: 8px;
+  box-shadow: 0px 4px 0px #000;
+}
+
+.sensor__dissolved-oxygen {
+  display: flex;
+  flex-direction: column;
+  height: 7rem;
+  flex: 1 0 0;
+  padding: 1rem;
+  background-color: #FFDADA;
+  border: 2px solid #000;
+  border-radius: 8px;
+  box-shadow: 0px 4px 0px #000;
+}
+
+.sensor-detail__temperature {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 0;
+  padding: 1rem;
+  background-color: #FFF6A1;
+  border: 2px solid #000;
+  border-radius: 8px;
+  box-shadow: 0px 4px 0px #000;
+}

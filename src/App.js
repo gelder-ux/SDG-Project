@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import TankList from "./components/TankList";
 import SensorDetail from "./components/SensorDetail";
 import axios from "axios";
-import { LineChart } from '@mui/x-charts/LineChart';
+import { LineChart } from "@mui/x-charts/LineChart";
 import { bool } from "prop-types";
 
 var timestamps = [];
@@ -25,14 +25,14 @@ const App = () => {
     const link = document.createElement("link");
 
     const favicon = document.createElement("link");
-    favicon.href = "https://www.thepaf.org/wp-content/uploads/2023/04/favicon-32x32-1.png";
+    favicon.href =
+      "https://www.thepaf.org/wp-content/uploads/2023/04/favicon-32x32-1.png";
 
     // Update the document title
     document.title = "PAF Data Hub";
-    favicon.rel = "icon"
+    favicon.rel = "icon";
     link.rel = "stylesheet";
     link.href = "https://fonts.googleapis.com/css?family=Red+Hat+Display"; // Replace with the actual path
-    
 
     // Append the link element to the head of the document
     document.head.appendChild(link);
@@ -52,9 +52,7 @@ const App = () => {
       sensors: [
         {
           name: "Sensor A",
-          data: [
-            (1,2),(3,4),(5,6)
-          ],
+          data: [(1, 2), (3, 4), (5, 6)],
         },
         {
           name: "Sensor B",
@@ -549,8 +547,8 @@ const App = () => {
   const [selectedTank, setSelectedTank] = useState(null);
 
   const handleTankClick = (tank) => {
-    const dataEx = require('./data/sensaphone_ex1.json');
-    console.log("data")
+    const dataEx = require("./data/sensaphone_ex1.json");
+    console.log("data");
     console.log(dataEx);
     console.log("done");
 
@@ -560,24 +558,24 @@ const App = () => {
     if (Array.isArray(sensaphoneData)) {
       sensaphoneData.forEach((item, index) => {
         console.log(`Data point ${index + 1}:`);
-        console.log('Timestamp:', item.timestamp);
-        timestamps[index] = (new Date(item.timestamp)).getTime();
-        console.log('Temperature (Celsius):', item.temperature_celsius);
+        console.log("Timestamp:", item.timestamp);
+        timestamps[index] = new Date(item.timestamp).getTime();
+        console.log("Temperature (Celsius):", item.temperature_celsius);
         temperature[index] = item.temperature_celsius;
-        console.log('Float Sensor:', item.float_sensor);
-        console.log('Power Sensor:', item.power_sensor);
-        console.log('------------------------');
+        console.log("Float Sensor:", item.float_sensor);
+        console.log("Power Sensor:", item.power_sensor);
+        console.log("------------------------");
         floatBinary = item.float_sensor;
-        powerBinary = item.power_sensor
+        powerBinary = item.power_sensor;
       });
     } else {
-      console.error('Invalid data format. sensaphone_data is not an array.');
+      console.error("Invalid data format. sensaphone_data is not an array.");
     }
     setSelectedTank(tank);
-    console.log(typeof(timestamps[0]));
+    console.log(typeof timestamps[0]);
     console.log(temperature);
     console.log(tank.id);
-    if (floatBinary == true){
+    if (floatBinary == true) {
       floatString = "good";
       floatColor = "green";
     } else {
@@ -585,11 +583,11 @@ const App = () => {
       floatColor = "red";
     }
 
-    if (powerBinary == true){
+    if (powerBinary == true) {
       powerString = "on";
       powerColor = "green";
     } else {
-      powerString = "off"
+      powerString = "off";
       powerColor = "red";
     }
   };
@@ -602,50 +600,69 @@ const App = () => {
     height: 300,
     legend: { hidden: true },
     margin: { top: 5 },
-    stackingOrder: 'descending',
+    stackingOrder: "descending",
   };
 
   return (
     <div className="container-fluid">
       <nav className="paf-nav">
-        <a href="#" className="btn tanks-button nav-button" onClick={handleBackClick}>Tanks</a>
+        <a
+          href="#"
+          className="btn tanks-button nav-button"
+          onClick={handleBackClick}
+        >
+          Tanks
+        </a>
         <h1 className="paf-title">PAF Data Hub</h1>
-        <a href="#" className="btn qr-button nav-button">QR</a>
+        <a href="#" className="btn qr-button nav-button">
+          QR
+        </a>
       </nav>
       <div className="row">
         {/* Show the list and detail view on larger screens */}
         <div className="col">
           {/* Show the detail view when a tank is selected */}
           {selectedTank && (
-            <div>
-              <div>
-                <h2 style={{color: "black"}}>Temperature in Celsius</h2>
+            <section className="sensor-detail__content">
+              <header className="sensor-detail__tank">
+                <h2>Tank #</h2>
+                <div>Species Name</div>
+              </header>
+              <div className="sensor-detail__temperature">
+                <h2 style={{ color: "black" }}>Temp °C</h2>
+
+                <LineChart
+                  xAxis={[
+                    {
+                      data: timestamps,
+                      scaleType: "time",
+                      label: "Time",
+                      hideTooltip: true,
+                    },
+                  ]}
+                  series={[
+                    {
+                      dataKey: "temperature_celsius",
+                      scaleType: "linear",
+                    },
+                  ]}
+                  dataset={
+                    require("./data/sensaphone_ex1.json").sensaphone_data
+                  }
+                  {...customize}
+                />
               </div>
-              <LineChart
-                xAxis={[
-                  {
-                    data: timestamps,
-                    scaleType: 'time',
-                    label: "Time",
-                    hideTooltip: true,
-                  },
-                ]}
-                series={[
-                  {
-                    dataKey: 'temperature_celsius',
-                    scaleType: 'linear',
-                  },
-                ]}
-                dataset={require('./data/sensaphone_ex1.json').sensaphone_data}
-                {...customize}
-              />
-              <div>
-                <h2 style={{color: floatColor}}>Water Level: {floatString}</h2>
+              <div className="sensor-detail__sensors--row">
+                <div className="sensor__water">
+                  <h2 style={{ color: floatColor }}>
+                    Water Level {floatString}
+                  </h2>
+                </div>
+                <div className="sensor__dissolved-oxygen">
+                  <h2 style={{ color: powerColor }}>Power: {powerString}</h2>
+                </div>
               </div>
-              <div>
-                <h2 style={{color: powerColor}}>Power: {powerString}</h2>
-              </div>
-            </div>
+            </section>
           )}
           {!selectedTank && (
             <TankList tankList={tankList} onItemClick={handleTankClick} />
