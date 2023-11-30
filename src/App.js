@@ -31,7 +31,7 @@ const App = () => {
         {
           name: "Sensor A",
           data: [
-            /* mock data for Sensor A */
+            1,2,3
           ],
         },
         {
@@ -527,6 +527,13 @@ const App = () => {
   const [selectedTank, setSelectedTank] = useState(null);
 
   const handleTankClick = (tank) => {
+    const dataEx = require('./data/sensaphone_ex1.json');
+    console.log("data")
+    console.log(dataEx)
+    console.log('key')
+    console.log(dataEx.key1);
+    console.log("done");
+
     setSelectedTank(tank);
   };
 
