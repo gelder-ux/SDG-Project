@@ -574,7 +574,7 @@ const App = () => {
       console.error('Invalid data format. sensaphone_data is not an array.');
     }
     setSelectedTank(tank);
-    console.log(timestamps);
+    console.log(typeof(timestamps[0]));
     console.log(temperature);
     console.log(tank.id);
     if (floatBinary == true){
@@ -618,15 +618,23 @@ const App = () => {
           {/* Show the detail view when a tank is selected */}
           {selectedTank && (
             <div>
+              <div>
+                <h2 style={{color: "black"}}>Temperature in Celsius</h2>
+              </div>
               <LineChart
                 xAxis={[
                   {
                     data: timestamps,
                     scaleType: 'time',
+                    label: "Time",
+                    hideTooltip: true,
                   },
                 ]}
                 series={[
-                  {dataKey: 'temperature_celsius'},
+                  {
+                    dataKey: 'temperature_celsius',
+                    scaleType: 'linear',
+                  },
                 ]}
                 dataset={require('./data/sensaphone_ex1.json').sensaphone_data}
                 {...customize}
