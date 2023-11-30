@@ -4,9 +4,17 @@ import TankList from "./components/TankList";
 import SensorDetail from "./components/SensorDetail";
 import axios from "axios";
 import { LineChart } from '@mui/x-charts/LineChart';
+import { bool } from "prop-types";
 
 var timestamps = [];
 var temperature = [];
+// false means off/bad; true means on/good; intialize to off/bad
+var floatBinary = false;
+var powerBinary = false;
+var floatString = "bad";
+var powerString = "off";
+var floatColor = "red";
+var powerColor = "red";
 
 const App = () => {
   useEffect(() => {
@@ -559,6 +567,8 @@ const App = () => {
         console.log('Float Sensor:', item.float_sensor);
         console.log('Power Sensor:', item.power_sensor);
         console.log('------------------------');
+        floatBinary = item.float_sensor;
+        powerBinary = item.power_sensor
       });
     } else {
       console.error('Invalid data format. sensaphone_data is not an array.');
@@ -567,6 +577,21 @@ const App = () => {
     console.log(timestamps);
     console.log(temperature);
     console.log(tank.id);
+    if (floatBinary == true){
+      floatString = "good";
+      floatColor = "green";
+    } else {
+      floatString = "bad";
+      floatColor = "red";
+    }
+
+    if (powerBinary == true){
+      powerString = "on";
+      powerColor = "green";
+    } else {
+      powerString = "off"
+      powerColor = "red";
+    }
   };
 
   const handleBackClick = () => {
@@ -606,6 +631,12 @@ const App = () => {
                 dataset={require('./data/sensaphone_ex1.json').sensaphone_data}
                 {...customize}
               />
+              <div>
+                <h2 style={{color: floatColor}}>Water Level: {floatString}</h2>
+              </div>
+              <div>
+                <h2 style={{color: powerColor}}>Power: {powerString}</h2>
+              </div>
             </div>
           )}
           {!selectedTank && (
