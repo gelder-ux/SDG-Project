@@ -10,11 +10,20 @@ const App = () => {
 
     // Create a link element
     const link = document.createElement("link");
+
+    const favicon = document.createElement("link");
+    favicon.href = "https://www.thepaf.org/wp-content/uploads/2023/04/favicon-32x32-1.png";
+
+    // Update the document title
+    document.title = "PAF Data Hub";
+    favicon.rel = "icon"
     link.rel = "stylesheet";
     link.href = "https://fonts.googleapis.com/css?family=Red+Hat+Display"; // Replace with the actual path
+    
 
     // Append the link element to the head of the document
     document.head.appendChild(link);
+    document.head.appendChild(favicon);
 
     // Clean up the class when the component unmounts
     return () => {

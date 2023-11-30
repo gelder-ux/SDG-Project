@@ -29,6 +29,10 @@ code {
   border: 2px solid #000;
   border-radius: 8px;
   box-shadow: 0px 4px 0px #000;
+
+  /* background-color: #e5e5f7;
+  opacity: 0.8;
+  background: linear-gradient(135deg, #444cf755 25%, transparent 25%) -10px 0/ 20px 20px, linear-gradient(225deg, #444cf7 25%, transparent 25%) -10px 0/ 20px 20px, linear-gradient(315deg, #444cf755 25%, transparent 25%) 0px 0/ 20px 20px, linear-gradient(45deg, #444cf7 25%, #e5e5f7 25%) 0px 0/ 20px 20px; */
 }
 
 .nav-button {
@@ -38,7 +42,7 @@ code {
 .nav-button:hover,
 .nav-button:focus {
   transition: background-color .1s ease-in-out;
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(0, 0, 0, 0.1);
   border-color: #000;
 }
 
@@ -102,9 +106,7 @@ code {
   margin-bottom: 0;
 }
 
-.tank-header {
-
-}
+.tank-header {}
 
 .tank-header__name {
   font-size: 1.778rem;
