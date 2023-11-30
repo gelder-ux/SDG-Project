@@ -96,6 +96,5 @@
       "float_sensor": false,
       "power_sensor": false
     }
-    // ... Continue with more data in five-minute intervals for the 2-hour time period
   ]
 }
