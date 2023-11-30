@@ -2,6 +2,11 @@
 import React, { useState, useEffect } from "react";
 import TankList from "./components/TankList";
 import SensorDetail from "./components/SensorDetail";
+import axios from "axios";
+import { LineChart } from '@mui/x-charts/LineChart';
+
+var timestamps = [];
+var temperature = [];
 
 const App = () => {
   useEffect(() => {
@@ -40,7 +45,7 @@ const App = () => {
         {
           name: "Sensor A",
           data: [
-            1,2,3
+            (1,2),(3,4),(5,6)
           ],
         },
         {
@@ -538,16 +543,41 @@ const App = () => {
   const handleTankClick = (tank) => {
     const dataEx = require('./data/sensaphone_ex1.json');
     console.log("data")
-    console.log(dataEx)
-    console.log('key')
-    console.log(dataEx.key1);
+    console.log(dataEx);
     console.log("done");
 
+    const sensaphoneData = dataEx.sensaphone_data;
+    console.log(sensaphoneData);
+    // Check if sensaphoneData is an array before using forEach
+    if (Array.isArray(sensaphoneData)) {
+      sensaphoneData.forEach((item, index) => {
+        console.log(`Data point ${index + 1}:`);
+        console.log('Timestamp:', item.timestamp);
+        timestamps[index] = (new Date(item.timestamp)).getTime();
+        console.log('Temperature (Celsius):', item.temperature_celsius);
+        temperature[index] = item.temperature_celsius;
+        console.log('Float Sensor:', item.float_sensor);
+        console.log('Power Sensor:', item.power_sensor);
+        console.log('------------------------');
+      });
+    } else {
+      console.error('Invalid data format. sensaphone_data is not an array.');
+    }
     setSelectedTank(tank);
+    console.log(timestamps);
+    console.log(temperature);
+    console.log(tank.id);
   };
 
   const handleBackClick = () => {
     setSelectedTank(null);
+  };
+
+  const customize = {
+    height: 300,
+    legend: { hidden: true },
+    margin: { top: 5 },
+    stackingOrder: 'descending',
   };
 
   return (
@@ -563,7 +593,19 @@ const App = () => {
           {/* Show the detail view when a tank is selected */}
           {selectedTank && (
             <div>
-              <SensorDetail selectedTank={selectedTank} />
+              <LineChart
+                xAxis={[
+                  {
+                    data: timestamps,
+                    scaleType: 'time',
+                  },
+                ]}
+                series={[
+                  {dataKey: 'temperature_celsius'},
+                ]}
+                dataset={require('./data/sensaphone_ex1.json').sensaphone_data}
+                {...customize}
+              />
             </div>
           )}
           {!selectedTank && (
