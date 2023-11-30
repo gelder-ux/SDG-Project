@@ -13,8 +13,8 @@ var floatBinary = false;
 var powerBinary = false;
 var floatString = "bad";
 var powerString = "off";
-var floatColor = "red";
-var powerColor = "red";
+var waterLevelStatusClass= "";
+var powerStatusClass = "";
 
 const App = () => {
   useEffect(() => {
@@ -577,18 +577,18 @@ const App = () => {
     console.log(tank.id);
     if (floatBinary == true) {
       floatString = "good";
-      floatColor = "green";
+      waterLevelStatusClass = "--good";
     } else {
       floatString = "bad";
-      floatColor = "red";
+      waterLevelStatusClass = "--bad";
     }
 
     if (powerBinary == true) {
       powerString = "on";
-      powerColor = "green";
+      powerStatusClass = "--good";
     } else {
       powerString = "off";
-      powerColor = "red";
+      powerStatusClass = "--bad";
     }
   };
 
@@ -611,11 +611,41 @@ const App = () => {
           className="btn tanks-button nav-button"
           onClick={handleBackClick}
         >
-          Tanks
+          <svg
+            width="38"
+            height="42"
+            viewBox="0 0 38 42"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M10.6663 10.9416V10.9624M27.333 27.6082V27.6291M16.558 16.8332C17.7237 15.6679 18.5176 14.183 18.8394 12.5665C19.1611 10.9499 18.9962 9.2742 18.3656 7.75133C17.7349 6.22847 16.6668 4.92683 15.2964 4.01104C13.9259 3.09525 12.3146 2.60645 10.6663 2.60645C9.01806 2.60645 7.4068 3.09525 6.03633 4.01104C4.66587 4.92683 3.59776 6.22847 2.96711 7.75133C2.33645 9.2742 2.17157 10.9499 2.49332 12.5665C2.81507 14.183 3.60899 15.6679 4.77468 16.8332L10.6663 22.727L16.558 16.8332ZM33.2247 33.4999C34.3904 32.3346 35.1843 30.8497 35.506 29.2331C35.8278 27.6165 35.6629 25.9409 35.0322 24.418C34.4016 22.8951 33.3335 21.5935 31.963 20.6777C30.5926 19.7619 28.9813 19.2731 27.333 19.2731C25.6847 19.2731 24.0735 19.7619 22.703 20.6777C21.3325 21.5935 20.2644 22.8951 19.6338 24.418C19.0031 25.9409 18.8382 27.6165 19.16 29.2331C19.4817 30.8497 20.2757 32.3346 21.4413 33.4999L27.333 39.3936L33.2247 33.4999Z"
+              stroke="black"
+              stroke-width="4.16667"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <span className="sr-only">Tanks</span>
         </a>
         <h1 className="paf-title">PAF Data Hub</h1>
         <a href="#" className="btn qr-button nav-button">
-          QR
+          <svg
+            width="38"
+            height="38"
+            viewBox="0 0 38 38"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M12.75 0.25H0.25V12.75H4.41667V4.41667H12.75V0.25ZM0.25 37.75V25.25H4.41667V33.5833H12.75V37.75H0.25ZM25.25 0.25V4.41667H33.5833V12.75H37.75V0.25H25.25ZM33.5833 25.25H37.75V37.75H25.25V33.5833H33.5833V25.25ZM8.58333 8.58333H16.9167V16.9167H8.58333V8.58333ZM8.58333 21.0833H16.9167V29.4167H8.58333V21.0833ZM29.4167 8.58333H21.0833V16.9167H29.4167V8.58333ZM21.0833 21.0833H29.4167V29.4167H21.0833V21.0833Z"
+              fill="black"
+            />
+          </svg>
+
+          <span className="sr-only">QR</span>
         </a>
       </nav>
       <div className="row">
@@ -653,13 +683,16 @@ const App = () => {
                 />
               </div>
               <div className="sensor-detail__sensors--row">
-                <div className="sensor__water">
-                  <h2 style={{ color: floatColor }}>
+                <div className={"sensor__water " + waterLevelStatusClass}>
+                  <h2>
                     Water Level {floatString}
                   </h2>
                 </div>
-                <div className="sensor__dissolved-oxygen">
-                  <h2 style={{ color: powerColor }}>Power: {powerString}</h2>
+                <div className={"sensor__dissolved-oxygen "}>
+                  <h2>Dissolved O2</h2>
+                </div>
+                <div className={"sensor__power " + powerStatusClass}>
+                  <h2>Power {powerString}</h2>
                 </div>
               </div>
             </section>
