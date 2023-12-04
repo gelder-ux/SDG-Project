@@ -15,6 +15,8 @@ var floatString = "bad";
 var powerString = "off";
 var waterLevelStatusClass= "";
 var powerStatusClass = "";
+var tankId;
+var tankSpecies;
 
 const App = () => {
   useEffect(() => {
@@ -548,23 +550,23 @@ const App = () => {
 
   const handleTankClick = (tank) => {
     const dataEx = require("./data/sensaphone_ex1.json");
-    console.log("data");
-    console.log(dataEx);
-    console.log("done");
+    //console.log("data");
+    //console.log(dataEx);
+    //console.log("done");
 
     const sensaphoneData = dataEx.sensaphone_data;
     console.log(sensaphoneData);
     // Check if sensaphoneData is an array before using forEach
     if (Array.isArray(sensaphoneData)) {
       sensaphoneData.forEach((item, index) => {
-        console.log(`Data point ${index + 1}:`);
-        console.log("Timestamp:", item.timestamp);
+        //console.log(`Data point ${index + 1}:`);
+        //console.log("Timestamp:", item.timestamp);
         timestamps[index] = new Date(item.timestamp).getTime();
-        console.log("Temperature (Celsius):", item.temperature_celsius);
+        //console.log("Temperature (Celsius):", item.temperature_celsius);
         temperature[index] = item.temperature_celsius;
-        console.log("Float Sensor:", item.float_sensor);
-        console.log("Power Sensor:", item.power_sensor);
-        console.log("------------------------");
+        //console.log("Float Sensor:", item.float_sensor);
+        //console.log("Power Sensor:", item.power_sensor);
+        //console.log("------------------------");
         floatBinary = item.float_sensor;
         powerBinary = item.power_sensor;
       });
@@ -572,6 +574,10 @@ const App = () => {
       console.error("Invalid data format. sensaphone_data is not an array.");
     }
     setSelectedTank(tank);
+    console.log(tank.species);
+    tankSpecies = tank.species;
+    tankId = tank.id;
+
     console.log(typeof timestamps[0]);
     console.log(temperature);
     console.log(tank.id);
@@ -655,8 +661,8 @@ const App = () => {
           {selectedTank && (
             <section className="sensor-detail__content">
               <header className="sensor-detail__tank">
-                <h2>Tank #</h2>
-                <div>Species Name</div>
+                <h2>Tank #: {tankId}</h2>
+                <div>Species Name: {tankSpecies}</div>
               </header>
               <div className="sensor-detail__temperature">
                 <h2 style={{ color: "black" }}>Temp °C</h2>
