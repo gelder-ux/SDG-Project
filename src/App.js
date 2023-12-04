@@ -5,6 +5,12 @@ import SensorDetail from "./components/SensorDetail";
 import axios from "axios";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { bool } from "prop-types";
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { timeSaturday } from "d3-time";
 
 var timestamps = [];
 var temperature = [];
@@ -17,6 +23,8 @@ var waterLevelStatusClass= "";
 var powerStatusClass = "";
 var tankId;
 var tankSpecies;
+var currTimeFrame = 2;
+var totalDataPoints = 24;
 
 const App = () => {
   useEffect(() => {
@@ -549,7 +557,7 @@ const App = () => {
   const [selectedTank, setSelectedTank] = useState(null);
 
   const handleTankClick = (tank) => {
-    const dataEx = require("./data/sensaphone_ex1.json");
+    const dataEx = require("./data/sensaphone_ex2.json");
     //console.log("data");
     //console.log(dataEx);
     //console.log("done");
@@ -608,6 +616,27 @@ const App = () => {
     margin: { top: 5 },
     stackingOrder: "descending",
   };
+  const [cTF, setCTF] = React.useState(2);
+
+  const handleChange = (event) => {
+    currTimeFrame = event.target.value;
+    console.log(currTimeFrame);
+    setCTF(event.target.value);
+    console.log(cTF);
+    totalDataPoints = (currTimeFrame * 60)/5;
+    console.log(totalDataPoints);
+    temperature = temperature.slice(0, totalDataPoints);
+    timestamps = timestamps.slice(0, totalDataPoints);
+  };
+  console.log('CTF');
+  console.log(cTF);
+  console.log(totalDataPoints);
+  console.log(temperature.slice(0, totalDataPoints));
+  console.log(timestamps.slice(0, totalDataPoints));
+
+  temperature = temperature.slice(0, totalDataPoints);
+  timestamps = timestamps.slice(0, totalDataPoints);
+
 
   return (
     <div className="container-fluid">
@@ -664,6 +693,24 @@ const App = () => {
                 <h2>Tank #: {tankId}</h2>
                 <div>Species Name: {tankSpecies}</div>
               </header>
+              <header className="sensor-detail__tank">
+                <Box sx={{ minWidth: 120 }}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Time Frame</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={currTimeFrame}
+                    label="Time Frame"
+                    onChange={handleChange}
+                  >
+                    <MenuItem value={2}>2 Hours</MenuItem>
+                    <MenuItem value={12}>12 Hours</MenuItem>
+                    <MenuItem value={24}>24 Hours</MenuItem>
+                  </Select>
+                </FormControl>
+                </Box>
+              </header>
               <div className="sensor-detail__temperature">
                 <h2 style={{ color: "black" }}>Temp °C</h2>
 
@@ -678,7 +725,7 @@ const App = () => {
                   ]}
                   series={[
                     {
-                      dataKey: "temperature_celsius",
+                      data: temperature,
                       scaleType: "linear",
                     },
                   ]}
