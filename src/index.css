@@ -104,7 +104,15 @@ code {
 }
 
 .paf-title {
+  border-radius: 8px;
   margin-bottom: 0;
+  font-weight: bold;
+  border: 2px solid black;
+  box-shadow: 0px 4px 0px #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
 }
 
 .tank-header {}
@@ -134,10 +142,48 @@ code {
   flex-direction: column;
   height: 7rem;
   flex: 1 0 0;
+  gap: 1rem;
   padding: 1rem;
   border: 2px solid #000;
   border-radius: 8px;
   box-shadow: 0px 4px 0px #000;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-grow {
+  flex: 1 0;
+}
+
+.paf-input-wrapper {
+  display: flex;
+}
+
+.paf-input {
+  display: flex;
+  flex: 1 0;
+  border: 2px solid #000;
+  background-color: #E9E9E9;
+  border-radius: 8px;
+  padding: 0.25rem 1rem;
+}
+
+.sensor-detail__tank-name {
+  font-weight: bold;
+  font-size: 1.778rem;
+  margin-bottom: 0;
+}
+
+.sensor-detail__tank-species {
+  font-size: 1rem;
 }
 
 .sensor-detail__sensors--row {
@@ -157,11 +203,13 @@ code {
 .sensor__water,
 .sensor__water.--good {
   display: flex;
+  justify-content: center;
   flex-direction: column;
-  height: 7rem;
+  align-items: center;
   flex: 1 0 0;
   padding: 1rem;
-  background-color: #3284FF;
+  text-align: center;
+  background-color: #CCF0FF;
   border: 2px solid #000;
   border-radius: 8px;
   box-shadow: 0px 4px 0px #000;
@@ -178,6 +226,7 @@ code {
   height: 7rem;
   flex: 1 0 0;
   padding: 1rem;
+  text-align: center;
   background-color: #32ffff;
   border: 2px solid #000;
   border-radius: 8px;
@@ -191,11 +240,13 @@ code {
 .sensor__dissolved-oxygen,
 .sensor__dissolved-oxygen.--good {
   display: flex;
+  justify-content: center;
   flex-direction: column;
-  height: 7rem;
   flex: 1 0 0;
   padding: 1rem;
-  background-color: #FFDADA;
+  align-items: center;
+  text-align: center;
+  background-color: #F1DAFF;
   border: 2px solid #000;
   border-radius: 8px;
   box-shadow: 0px 4px 0px #000;
@@ -214,4 +265,12 @@ code {
   border: 2px solid #000;
   border-radius: 8px;
   box-shadow: 0px 4px 0px #000;
+}
+
+.sensor-detail__temperature h2,
+.sensor__dissolved-oxygen h2,
+.sensor__power h2,
+.sensor__water h2 {
+  font-weight: bold;
+  font-size: 1.25rem;
 }
