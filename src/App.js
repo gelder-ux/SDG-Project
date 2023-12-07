@@ -645,7 +645,7 @@ const App = () => {
   return (
     <div className="container-fluid">
       <nav className="paf-nav">
-        <h1 className="paf-title">PAF Data Hub</h1>
+        <h1 className="paf-title">WaiKilo Kōkua</h1>
         <a
           href="#"
           className="btn tanks-button nav-button"
